@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useChat } from './hooks/useChat';
+import { Header } from './components/Header';
+import { ChatMessages } from './components/ChatMessages';
+import { ChatInput } from './components/ChatInput';
 
 function App() {
+  const { messages, isLoading, sendMessage } = useChat();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col h-screen bg-gray-50">
+      <Header />
+      
+      <div className="flex flex-col flex-1 max-w-4xl mx-auto w-full p-4">
+        <ChatMessages messages={messages} isLoading={isLoading} />
+        <ChatInput onSendMessage={sendMessage} isLoading={isLoading} />
+      </div>
     </div>
   );
 }
