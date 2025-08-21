@@ -9,7 +9,7 @@ function App() {
   const { messages, isLoading, sendMessage } = useChat();
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-900">
       <Header />
       
       <div className="flex flex-col flex-1 max-w-4xl mx-auto w-full p-4">
