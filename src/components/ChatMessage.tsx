@@ -1,5 +1,6 @@
 import React from 'react';
 import { Message } from '../types';
+import { parseMarkdown } from '../utils/markdown';
 
 interface ChatMessageProps {
   message: Message;
@@ -24,7 +25,15 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
             {isUser ? '👤 You' : '🤖 Robot'}
           </span>
         </div>
-        <p className="text-gray-800 whitespace-pre-wrap">{message.content}</p>
+        
+        {isUser ? (
+          <p className="text-gray-800 whitespace-pre-wrap">{message.content}</p>
+        ) : (
+          <div 
+            className="text-gray-800 prose prose-sm max-w-none markdown-content"
+            dangerouslySetInnerHTML={{ __html: parseMarkdown(message.content) }}
+          />
+        )}
       </div>
     </div>
   );
