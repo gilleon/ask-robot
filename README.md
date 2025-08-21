@@ -1,46 +1,152 @@
-# Getting Started with Create React App
+# Ask Robot - Elementary Tutor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React TypeScript chat application that provides elementary school tutoring using an AI assistant powered by Ollama. The app features a clean dark mode interface with markdown support for rich content formatting.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- AI-powered elementary school tutoring
+- Dark mode interface
+- Full markdown support (tables, images, code blocks, lists)
+- Real-time chat interface
+- Responsive design with Tailwind CSS
+- Loading states and error handling
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS
+- **Markdown**: Marked.js (via CDN)
+- **API**: Ollama LLM (gpt-oss:120b model)
+- **HTTP Client**: Axios
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+```
+src/
+├── components/
+│   ├── ChatInput.tsx      # Message input component
+│   ├── ChatMessage.tsx    # Individual message display
+│   ├── ChatMessages.tsx   # Messages container
+│   ├── EmptyState.tsx     # Welcome message
+│   ├── Header.tsx         # App header
+│   └── LoadingMessage.tsx # Loading indicator
+├── hooks/
+│   └── useChat.ts         # Chat logic custom hook
+├── types/
+│   └── index.ts           # TypeScript interfaces
+├── utils/
+│   ├── api.ts             # API communication
+│   └── markdown.ts        # Markdown parsing utilities
+├── App.tsx                # Main app component
+├── App.css                # Global styles and markdown styling
+└── index.tsx              # App entry point
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (v14 or higher)
+- npm or yarn
+- Access to Ollama API endpoint
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+```bash
+git clone https://github.com/gilleon/ask-robot.git
+cd ask-robot
+```
 
-### `npm run eject`
+2. Install dependencies:
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Install additional packages:
+```bash
+npm install axios
+npm install -D tailwindcss postcss autoprefixer
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Initialize Tailwind CSS:
+```bash
+npx tailwindcss init -p
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+5. Update the API configuration in `src/utils/api.ts` if needed:
+```typescript
+const OLLAMA_API_URL = "https://ollama.utahtech.dev/api/chat";
+const MODEL = "gpt-oss:120b";
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Available Scripts
 
-## Learn More
+#### `npm start`
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### `npm test`
+Launches the test runner in interactive watch mode.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Configuration
+
+### Tailwind Configuration
+The app uses Tailwind CSS with custom configuration in `tailwind.config.js`:
+
+```javascript
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+### Markdown Support
+Markdown rendering is handled by Marked.js loaded via CDN. The library is configured in `src/utils/markdown.ts` with:
+- GitHub Flavored Markdown support
+- Line break handling
+- Custom styling for dark mode
+
+### API Integration
+The app connects to an Ollama API endpoint with:
+- Model: `gpt-oss:120b`
+- System prompt optimized for elementary school tutoring
+- Error handling and retry logic
+
+## Styling
+
+The app features a comprehensive dark mode design with:
+- **Colors**: Gray-based palette (gray-700 to gray-900)
+- **Accents**: Blue for user messages, green for assistant
+- **Typography**: Responsive text sizing with proper contrast
+- **Components**: Rounded corners, shadows, and smooth transitions
+
+### Markdown Styling
+Custom CSS classes provide dark mode styling for:
+- Headers (h1, h2, h3)
+- Code blocks and inline code
+- Tables with borders and hover effects
+- Lists and blockquotes
+- Images and links
+
+## Components
+
+### Core Components
+- **App**: Main application container
+- **Header**: Application title and branding
+- **ChatMessages**: Message history container
+- **ChatMessage**: Individual message with markdown rendering
+- **ChatInput**: Message input with keyboard handling
+- **EmptyState**: Welcome message for new users
+- **LoadingMessage**: Typing indicator
+
+### Custom Hooks
+- **useChat**: Manages chat state, message sending, and API integration
+
+### Utilities
+- **api.ts**: Ollama API communication
+- **markdown.ts**: Markdown parsing and rendering
+
